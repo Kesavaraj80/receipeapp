@@ -1,43 +1,35 @@
-import Carousel from 'react-material-ui-carousel'
+import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
+  const [recipes,setRecipes] =useState([]);
+  // http://localhost:9000/recipes
+  
 
-  const receipies = [{
-    imageurl: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/gnocchi-1d16725.jpg?quality=90&webp=true&resize=375,341",
-    name: "Chorizo & mozzarella gnocchi bake"
-  },
-  {
-    imageurl: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/butter-chicken-cf6f9e2.jpg?quality=90&webp=true&resize=375,341",
-    name: "Easy butter chicken"
-  },
-  {
-    imageurl: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/classic-lasange-4a66137.jpg?quality=90&webp=true&resize=375,341",
-    name: "Easy classic lasagne"
-  },
-  {
-    imageurl: "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/easy-teriyaki-c845724.jpg?quality=90&webp=true&resize=375,341",
-    name: "Easy teriyaki chicken"
-  }];
-
+  useEffect(()=>{
+    fetch("https://movies-database-kesavan.herokuapp.com/recipes")
+  .then(data=>data.json())
+  .then(recipe=>setRecipes(recipe)); 
+  },[])
 
   return (
-    <Carousel className="App"
-    autoPlay={true}
-    animation="slide"
-    >
+    <div className="container">
       {
-        receipies.map((item)=>{
-          return(
-            <div className="receipie_container">
-              <img src={item.imageurl}alt={item.name} className="r_image"></img>
-              <h1>{item.name}</h1>
-            </div>
-          )
+        recipes.map((item,index)=>{
+          return <RecipeItem image={item.imageurl} name={item.name} key={index}/>
         })
       }
-    </Carousel>
+    </div>
   );
 }
 
+
+function RecipeItem({image,name}){
+  return(
+    <div className="recipe_container">
+      <img src={image} alt={name} className="recipe_image"></img>
+      <p className="recipe_name">{name}</p>
+    </div>
+  )
+}
 export default App;

@@ -1,13 +1,23 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
-
-.receipie_container{
-  height: auto;
-  width: auto;
-  background-color: rgb(214, 214, 214);
+.recipe_container{
+  height:400px;
+  background-color:gray;
+  width: 330px;
+  border-radius:10px;
+  overflow:hidden;
 }
-.r_image{
-  border-radius: 50%;
+
+.recipe_image{
+  height:300px;
+  width:330px;
+}
+.recipe_name{
+  font-family: 'Quicksand', sans-serif;
 }
